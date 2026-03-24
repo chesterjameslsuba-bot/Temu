@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Reward</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* CLAIM SCREEN */
+    #claim {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff7a00, #ff3d00);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #claim h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    #claim p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff3d00;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* LOADING */
+    #loading {
+      display: none;
+      width: 100%;
+      height: 100%;
+      background: #ff6a00;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      position: absolute;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255,255,255,0.3);
+      border-top: 6px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* PRANK */
+    #prank {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #ff6ec4, #7873f5, #42e695, #ff9a9e);
+      background-size: 800% 800%;
+      animation: gradientMove 10s ease infinite;
+      position: absolute;
+      width: 100%;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2 {
+      font-size: 50px;
+      color: white;
+      text-shadow: 0 0 15px rgba(0,0,0,0.4);
+      animation: pop 1s ease;
+      z-index: 2;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.7);
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CLAIM SCREEN -->
+  <div id="claim">
+    <h1>🎉 Congratulations!</h1>
+    <p>You are eligible to receive ₱300 reward</p>
+    <button onclick="startClaim()">Claim Reward</button>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <h2>Processing your reward...</h2>
+  </div>
+
+  <!-- PRANK -->
+  <div id="prank">
+    <h2>Hi Cutiepie 😘</h2>
+  </div>
+
+  <script>
+    function startClaim() {
+      document.getElementById("claim").style.display = "none";
+      document.getElementById("loading").style.display = "flex";
+
+      setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("prank").style.display = "flex";
+        startHearts();
+      }, 2500);
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
